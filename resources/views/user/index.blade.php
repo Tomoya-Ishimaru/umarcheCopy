@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                商品一覧
+                商品一覧ウェーイ
             </h2>
                 <form method="get" action="{{ route('user.items.index')}}">
                     <div class="lg:flex lg:justify-around">
