@@ -34,6 +34,11 @@ class Product extends Model
         return $this->belongsTo(Shop::class);
     }
 
+    public function history()
+    {
+        return $this->hasMany(History::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(SecondaryCategory::class, 'secondary_category_id');
@@ -69,6 +74,8 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'carts')
         ->withPivot(['id', 'quantity']);
     }
+
+ 
 
     public function scopeAvailableItems($query)
     {

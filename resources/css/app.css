@@ -3,3 +3,9 @@
 @import 'tailwindcss/utilities';
 @import 'micromodal';
 @import 'swiper';
+
+.font-semibold{
+color:red
+}
+
+

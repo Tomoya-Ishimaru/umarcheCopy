@@ -31633,6 +31633,10 @@ select {
   height: 300px;
 }
 
+.font-semibold{
+  color:red
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -184667,3 +184671,6 @@ select {
             animation: bounce 1s infinite;
   }
 }
+
+
+
