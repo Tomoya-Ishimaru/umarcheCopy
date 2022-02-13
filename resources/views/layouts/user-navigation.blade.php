@@ -20,6 +20,9 @@
                     <x-nav-link :href="route('user.cart.index')" :active="request()->routeIs('user.cart.index')">
                         カートを表示
                     </x-nav-link>
+                    <x-nav-link :href="route('user.cart.thanks')" :active="request()->routeIs('user.cart.thanks')">
+                        購入履歴
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -64,6 +67,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">

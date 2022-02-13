@@ -9,15 +9,15 @@ if($type === 'products'){
 @endphp
 
 <div >
- <div class="cover-slide hover-darken inview">
+ <!-- <div class="cover-slide hover-darken inview"> -->
    @if(empty($filename))
     <img class="img-zoom" src="{{ asset('images/no_image.jpg')}}">
    @else
     <img class="img-zoom" src="{{ asset($path . $filename)}}">
    @endif
-  </div>
+  <!-- </div> -->
 </div>
-<style>
+<!-- <style>
   img {
     max-width: 100%;
     vertical-align: bottom;
@@ -226,4 +226,4 @@ if($type === 'products'){
     padding-top: 50%;
   }
   /*# sourceMappingURL=style.css.map */
-</style>
+</style> -->

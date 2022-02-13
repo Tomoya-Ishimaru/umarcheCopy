@@ -18,43 +18,7 @@ class CartController extends Controller
 {
     public function index()
      {
-    //     $user = User::findOrFail(Auth::id());
-    //     $histories = History::where('user_id', $user->id)->get();
-    //     $historyInfo = History::with('product.imageFirst')->where('user_id', $user->id)->get();
-    //     foreach($historyInfo as $history){
-           
-    //         dd($history->product->price);
-    //        }
-         
-        // $products = Product::where('product_id', $histories->product_id)->get();
-       
-         //dd($histories);
-          //foreach($histories as $history){
-           //dd($history);
-        //    $products[] = Product::where('id', $history->product_id)->first();
-        //    array_push($array,$history->quantity);
-         //}
-        // // $itemInCart = Cart::where('product_id', $request->product_id)
-        // dd($products);
-        
-         
-        
-        // $totalPrice = 0;
-        
-        // foreach($products as $product){
-        //    // dd($product->pivot);
-        //     // dd($product);
-        //     $totalPrice += $product->price * $product->pivot->quantity;
-        // }
-
-        // foreach($histories as $history){
-        //     // dd($history->product_id->price);
-
-        //     $prod = Product::where('id', $history->product_id)->first();
-           
-        //      $totalPrice += $prod->price * $history->quantity;
-        //      //dd($totalPrice);
-        //  }
+   
 
 
         $user = User::findOrFail(Auth::id());
@@ -68,16 +32,9 @@ class CartController extends Controller
             
         }
 
-
-        // foreach ($products as $product ){
-        //     dd($product->imageFirst);
-        // }
-
-
-
-
-
         
+
+       
 
         return view('user.cart', 
             compact('products', 'totalPrice'));
@@ -85,43 +42,40 @@ class CartController extends Controller
 
 
 
-    public function thanks()
+    public function thanks(Request $request)
     {
+
+        // "url" => "http://127.0.0.1:8000/cart/checkout";
+
+         
+       
         
          $user = User::findOrFail(Auth::id());
          $histories = History::where('user_id', $user->id)->get();
-        $historyInfo = History::with('product.imageFirst')->where('user_id', $user->id)->get();
+         $historyInfo = History::with('product.imageFirst')->where('user_id', $user->id)->get();
+         $checkoutFlag = false;
 
-        //   foreach($historyInfo as $history){
-        //     foreach($history->product as $product){
-        //          dd($product->imageFirst->filename);
-        //     }}
-       
-        
-        // $totalPrice = 0;
-        
-        // foreach($products as $product){
-        //    // dd($product->pivot);
-        //     // dd($product);
-        //     $totalPrice += $product->price * $product->pivot->quantity;
-        // // }
+         if($request->session()->get("checkFlag") === true){
+            $checkoutFlag = true;
+         }
+         
+         session()->forget("checkFlag");
 
-        // foreach($histories as $history){
-        //     // dd($history->product_id->price);
-
-        //     $prod = Product::where('id', $history->product_id)->first();
-           
-        //      $totalPrice += $prod->price * $history->quantity;
-        //      //dd($totalPrice);
+        //  dd($data = $request->session()->all(),$checkoutFlag);
+        //  if($request->session()->get("_previous") === "http://127.0.0.1:8000"){
+        //     $checkoutFlag = true;
         //  }
-        // }
+        //  dd($checkoutFlag,$request->session()->get("_previous")->get("url"));
+        //    dd($checkoutFlag,$request->session()->get("_previous"),$request->session()->get("_previous"."url"));
+
+    //  dd($request->session()->get("url"));
 
         return view('user.thanks'
         ,
-         compact('historyInfo'));
+         compact('historyInfo','checkoutFlag'));
     }
 
-
+    
 
 
 
@@ -206,7 +160,7 @@ class CartController extends Controller
             compact('session', 'publicKey'));
     }
 
-    public function success()
+    public function success(Request $request)
     {
         ////
         $items = Cart::where('user_id', Auth::id())->get();
@@ -231,7 +185,6 @@ class CartController extends Controller
                 'user_id' => Auth::id(),
                 'product_id' => $item->product_id,
                 'quantity' => $item->quantity,
-                // 'goodsPrice' => Product::findOrFail($item->product_id)->price
              ]);
         
             }
@@ -239,6 +192,9 @@ class CartController extends Controller
 
 
         Cart::where('user_id', Auth::id())->delete();
+        // dd($request->session()->get("_previous"));
+
+        $request->session()->put(['checkFlag' => true]);
 
         return redirect()->route('user.cart.thanks');
     }

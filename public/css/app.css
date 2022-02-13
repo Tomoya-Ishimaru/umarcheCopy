@@ -31633,9 +31633,10 @@ select {
   height: 300px;
 }
 
+/* 
 .font-semibold{
-  color:red
-}
+color:red
+} */
 
 @media (min-width: 640px) {
   .sm\:container {

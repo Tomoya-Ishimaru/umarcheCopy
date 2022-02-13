@@ -1,17 +1,23 @@
 <x-app-layout>
-<x-slot name="header">
+
+
+     <x-slot name="header">
+     @if($checkoutFlag)
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             ご購入ありがとうございました。
         </h2>
-    </x-slot>
-
+        @endif 
+     </x-slot>
+  
 
     <div class="py-12">
     
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h2 class=" bg-white md:flex md:items-center mb-4  text-xl text-gray-800 leading-tight">
+            <!-- <h2 class=" bg-white md:flex md:items-center mb-4  text-xl text-gray-800 leading-tight"> -->
+            <div class="p-6 flex justify-center bg-white border-b border-gray-200">
             購入履歴
-             </h2>
+            </div>
+             <!-- </h2> -->
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             
               <div class="p-6 bg-white border-b border-gray-200">
