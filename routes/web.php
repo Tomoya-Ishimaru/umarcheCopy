@@ -22,10 +22,14 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth:users')->group(function(){
-        Route::get('/', [ItemController::class, 'index'])->name('items.index');
-        Route::get('show/{item}', [ItemController::class, 'show'])->name('items.show');
-});
+
+
+
+
+//  Route::middleware('auth:users')->group(function(){
+//          Route::get('/', [ItemController::class, 'index'])->name('items.index');
+//         Route::get('show/{item}', [ItemController::class, 'show'])->name('items.show');
+//  });
 
 Route::prefix('cart')->middleware('auth:users')->group(function(){
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
@@ -45,5 +49,15 @@ Route::get('/component-test1', [ComponentTestController::class, 'showComponent1'
 Route::get('/component-test2', [ComponentTestController::class, 'showComponent2']);
 Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showServiceContainerTest']);
 Route::get('/serviceprovidertest', [LifeCycleTestController::class, 'showServiceProviderTest']);
+
+Route::get('/', [ComponentTestController::class, 'index'])
+// ->middleware('guest')
+  ->name('items.index')
+;
+
+Route::get('show/{item}', [ComponentTestController::class, 'show'])
+        // ->middleware('auth:users')
+        ->name('items.show');
+
 
 require __DIR__.'/auth.php';

@@ -17,10 +17,13 @@ class ItemController extends Controller
     public function __construct()
     {
         $this->middleware('auth:users');
+     
+   
 
         $this->middleware(function ($request, $next) {
-
+          
             $id = $request->route()->parameter('item'); 
+            
             if(!is_null($id)){ 
             $itemId = Product::availableItems()->where('products.id', $id)->exists();
                 if(!$itemId){ 
@@ -44,6 +47,7 @@ class ItemController extends Controller
 
         $categories = PrimaryCategory::with('secondary')
         ->get();
+
 
         $products = Product::availableItems()
         ->selectCategory($request->category ?? '0')
